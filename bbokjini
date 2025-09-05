@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BbokJini - Tamagotchi Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fce4ec;
+      color: #333;
+    }
+    .game-container {
+      margin: 20px auto;
+      padding: 20px;
+      border: 2px solid #ff80ab;
+      border-radius: 10px;
+      background-color: #fff;
+      width: 300px;
+    }
+    .pet {
+      margin: 10px 0;
+    }
+    .pet img {
+      width: 100px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff80ab;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff4081;
+    }
+  </style>
+</head>
+<body>
+  <h1>BbokJini</h1>
+  <p>Take care of BbokAri the Chick and Jiniret the Ferret!</p>
+
+  <div class="game-container">
+    <div class="pet">
+      <h2>BbokAri (Chick)</h2>
+      <img src="https://via.placeholder.com/100?text=Chick" alt="BbokAri">
+      <p>Happiness: <span id="bbokari-happiness">50</span></p>
+      <p>Hunger: <span id="bbokari-hunger">50</span></p>
+      <button onclick="feedBbokAri()">Feed</button>
+      <button onclick="playWithBbokAri()">Play</button>
+    </div>
+    <div class="pet">
+      <h2>Jiniret (Ferret)</h2>
+      <img src="https://via.placeholder.com/100?text=Ferret" alt="Jiniret">
+      <p>Happiness: <span id="jiniret-happiness">50</span></p>
+      <p>Hunger: <span id="jiniret-hunger">50</span></p>
+      <button onclick="feedJiniret()">Feed</button>
+      <button onclick="playWithJiniret()">Play</button>
+    </div>
+  </div>
+
+  <script>
+    let bbokari = { happiness: 50, hunger: 50 };
+    let jiniret = { happiness: 50, hunger: 50 };
+
+    function feedBbokAri() {
+      bbokari.hunger = Math.max(0, bbokari.hunger - 10);
+      updateStats();
+    }
+
+    function playWithBbokAri() {
+      bbokari.happiness = Math.min(100, bbokari.happiness + 10);
+      updateStats();
+    }
+
+    function feedJiniret() {
+      jiniret.hunger = Math.max(0, jiniret.hunger - 10);
+      updateStats();
+    }
+
+    function playWithJiniret() {
+      jiniret.happiness = Math.min(100, jiniret.happiness + 10);
+      updateStats();
+    }
+
+    function updateStats() {
+      document.getElementById("bbokari-happiness").innerText = bbokari.happiness;
+      document.getElementById("bbokari-hunger").innerText = bbokari.hunger;
+      document.getElementById("jiniret-happiness").innerText = jiniret.happiness;
+      document.getElementById("jiniret-hunger").innerText = jiniret.hunger;
+    }
+
+    // Decrease happiness and increase hunger over time
+    setInterval(() => {
+      bbokari.happiness = Math.max(0, bbokari.happiness - 1);
+      bbokari.hunger = Math.min(100, bbokari.hunger + 1);
+
+      jiniret.happiness = Math.max(0, jiniret.happiness - 1);
+      jiniret.hunger = Math.min(100, jiniret.hunger + 1);
+
+      updateStats();
+    }, 3000); // Every 3 seconds
+  </script>
+</body>
+</html>
